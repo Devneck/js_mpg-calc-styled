@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<!--
+		Name:					Sean Glover
+		Class:					CIS 114 - JavaScript/jQuery
+		Assignment:	Lesson 02 - mpg
+		Due: 						4/17/13
+	-->
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Calculate MPG</title>
+	
+	<link rel="stylesheet" href="mpg.css" />
+		
+	<script type="text/javascript" language="javascript">		
+		//	<![CDATA[
+		
+		// function to grab element id
+		var $ = function (id) {
+			return document.getElementById(id);
+		}
+    
+		// function to validate field values and calculate mpg based on user entries
+		var calculateMpg = function () {
+			var miles = parseFloat($("miles").value);
+			var gallons = parseFloat($("gallons").value);
+			
+			// conditional field validations
+			if (isNaN(miles)) {
+				alert("Miles must be numeric");
+			} else if (miles == 0) {
+				alert("Miles must be greater than zero");
+			} else if (isNaN(gallons)) {
+				alert("Gallons must be numeric");
+			} else if (gallons == 0) {
+				alert("Gallons must be greater than zero");
+			} else {
+				var mpg = miles / gallons;
+				$("mpg").value = mpg.toFixed(1);
+			}
+		}
+		
+		// function to clear all fields and set focus to Miles Driven field
+		var clear = function () {
+			$("miles").value = "";
+			$("gallons").value = "";
+			$("mpg").value = "";
+			$("miles").focus();
+		}
+
+		// window load function to handle user events
+		window.onload = function () {
+			$("calculate").onclick = calculateMpg;
+			$("miles").focus();
+			$("clear").onclick = clear;
+			$("miles").ondblclick = clear;
+		}
+			
+		//	]]>
+  </script>
+</head>
+<body>
+	<h1>Calculate Miles Per Gallon</h1>
+	<label for="miles">Miles Driven:</label>
+	<input type="text" id="miles" /><br />
+	<label for="gallons">Gallons of Gas Used:</label>
+	<input type="text" id="gallons" /><br />
+	<label for="mpg">Miles Per Gallon</label>
+	<input type="text" id="mpg" disabled="disabled" /><br />
+	<label>&nbsp;</label>
+	<input type="button" id="calculate" value="Calculate MPG" /><br />
+	<label>&nbsp;</label>	
+	<input type="button" id="clear" value="Clear All" />
+</body>
+</html>
